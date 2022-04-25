@@ -9,6 +9,7 @@ public class Pickups : MonoBehaviour
     //[SerializeField]
     //public GameObject PickupZoneOne;
     //public GameObject PickupZoneTwo;
+    private Tank playerTank;
 
     public Transform Pickup;
 
@@ -25,7 +26,7 @@ public class Pickups : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerTank = FindObjectOfType<Tank>();
     }
 
     // Update is called once per frame
