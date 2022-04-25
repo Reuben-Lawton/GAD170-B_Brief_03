@@ -6,10 +6,15 @@ using UnityEngine.Events;
 public class Pickups : MonoBehaviour
 {
     [Header("In Game Pickups")]
-    public GameObject RepairKit;
-    public GameObject SingleAmmo;
-    public GameObject TwentyPackAmmo;
-    public GameObject ShieldTwentyPercent;
+    //[SerializeField]
+    //public GameObject PickupZoneOne;
+    //public GameObject PickupZoneTwo;
+
+    public Transform Pickup;
+
+    //public GameObject SingleAmmo;
+    //public GameObject TwentyPackAmmo;
+    //public GameObject ShieldTwentyPercent;
 
     [Header("Ammo, Shield, Repair Kit Count")]
     private float m_maxBonusShield = 2.5f;
@@ -20,7 +25,7 @@ public class Pickups : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -29,15 +34,21 @@ public class Pickups : MonoBehaviour
 
     }
 
-    public void AddShield(float shieldValueAmount)
+    //public void AddShield(float shieldValueAmount)
+    //{
+    //    Debug.Log("Will be adding an event to activate");
+
+
+    //}
+
+    //private void DoShieldIncrease()
+    //{
+
+    //}
+
+    private void GetObjects()
     {
-        Debug.Log("Will be adding an event to activate");
-
-
+        
     }
 
-    private void DoShieldIncrease()
-    {
-
-    }
 }
