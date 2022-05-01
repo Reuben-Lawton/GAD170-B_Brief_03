@@ -22,13 +22,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 318541969840425566, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
-      propertyPath: tankControls.fireButton
-      value: 306
+      propertyPath: enableTankMovement
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 318541969840425566, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
-      propertyPath: enableTankMovement
-      value: 0
+      propertyPath: tankControls.fireButton
+      value: 306
       objectReference: {fileID: 0}
     - target: {fileID: 491440104372762009, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
@@ -45,6 +45,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 491440104372762015, guid: 268f946728390b64db521f40f31a4a70,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player_One
+      objectReference: {fileID: 0}
     - target: {fileID: 2328160367199845525, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -53,6 +58,11 @@ PrefabInstance:
     - target: {fileID: 2328160367199845525, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
+        type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
@@ -72,6 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -83,16 +98,6 @@ PrefabInstance:
     - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3497797121813383052, guid: 268f946728390b64db521f40f31a4a70,
