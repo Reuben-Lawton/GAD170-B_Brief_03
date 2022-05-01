@@ -8,6 +8,8 @@ TagManager:
   - Player_One
   - Player_Two
   - RedPickup
+  - BaseTank
+  - GauntletSpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -9,24 +9,30 @@ public class Pickups : MonoBehaviour
     //[SerializeField]
     //public GameObject PickupZoneOne;
     //public GameObject PickupZoneTwo;
-    private Tank playerTank;
+    //private Tank playerTank;
 
-    public GameObject GreenPickupPrefab;
+    private GameObject GreenPickupPrefab;
 
-    public GameObject RedPickupPrefab;
+    private GameObject RedPickupPrefab;
 
     private bool greenSetup = false;
     private bool redSetup = false;
 
-    public int pickupCount = 6;
+    
 
     private int currentPickup = 0;
 
     // Green Pickups List
-    private List<GameObject> greenPickups = new List<GameObject>(); // A list to hold all of the green pickups that are spawned in
+    public List<GameObject> greenPickups = new(); // A list to hold all of the green pickups that are spawned in
 
     // Red Pickups List
-    private List<GameObject> redPickups = new List<GameObject>(); // A list to hold all of the green pickups that are spawned in
+    public List<GameObject> redPickups = new(); // A list to hold all of the green pickups that are spawned in
+
+    public int pickupCount = 6;
+
+    public float forceApplied = 500; // Force applied when we hit something
+    private Rigidbody rigid; // reference to the rigidbody
+
 
     public Vector3 startPosition;
 
@@ -46,12 +52,11 @@ public class Pickups : MonoBehaviour
     //private HingeJoint hingeJoint;
 
     // Start is called before the first frame update
-    void Start()
+    public void StartSpawnPickups()
     {
         RoundOneStartPosition();
-        //GetObjects();
+        GetObjects();
         Initialise();
-
     }
 
     //public void AddShield(float shieldValueAmount)
@@ -69,7 +74,7 @@ public class Pickups : MonoBehaviour
     private void Initialise()
     {
        if(greenSetup != true)
-        {
+        {            
             for (int i = 0; i < pickupCount; i++)
             {
                 // Spawns in the green token
@@ -97,9 +102,7 @@ public class Pickups : MonoBehaviour
             SpawnPickups(redPickups);
 
             redSetup = true;
-        }
-
-        
+        }        
 
     }
 
@@ -163,7 +166,7 @@ public class Pickups : MonoBehaviour
 
     }
 
-    private void RoundOneStartPosition()
+    public void RoundOneStartPosition()
     {
         // Sets the starting point for where the pickups are spawned from 
         // startPosition = roundOnePickupStart.position;
@@ -171,12 +174,23 @@ public class Pickups : MonoBehaviour
         startPosition = new(15, 26, 5f);
     }
 
-    //private void GetObjects()
-    //{        
-    //    // reference to the green and red prefab ojbects
-    //    GreenPickupPrefab = GameObject.FindGameObjectWithTag("GreenPickup");
-    //    RedPickupPrefab = GameObject.FindGameObjectWithTag("RedPickup");        
-    //}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collision Enter");
+        // if (collision.transform)
+        rigid.AddForce(Vector3.up * forceApplied);
+    }
+
+
+    private void GetObjects()
+    {
+        // reference to the green and red prefab ojbects
+        // GreenPickupPrefab = GameObject.FindGameObjectWithTag("GreenPickup");
+        // RedPickupPrefab = GameObject.FindGameObjectWithTag("RedPickup");
+
+        rigid = GetComponent<Rigidbody>();
+    }
 
 
 
