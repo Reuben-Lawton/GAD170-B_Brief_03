@@ -99,32 +99,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7601281984167530496, guid: aa5f39ba93b225745b437799b3cb5878,
         type: 3}
-      propertyPath: m_Constraints
-      value: 122
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7601281984167530496, guid: aa5f39ba93b225745b437799b3cb5878,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601281984167530496, guid: aa5f39ba93b225745b437799b3cb5878,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616109652049395430, guid: aa5f39ba93b225745b437799b3cb5878,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 5bd21e2a9af4b444ab98818fee21be24,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: -5856433225665286268, guid: aa5f39ba93b225745b437799b3cb5878, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aa5f39ba93b225745b437799b3cb5878, type: 3}
---- !u!1 &1445979665710133403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5738920310895835009, guid: aa5f39ba93b225745b437799b3cb5878,
-    type: 3}
-  m_PrefabInstance: {fileID: 6608358751477909274}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1893405155805219204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445979665710133403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f400ab4561339a4ca027886036869b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GreenPickupPrefab: {fileID: 0}
-  RedPickupPrefab: {fileID: 0}
-  pickupCount: 6
-  forceApplied: 50
-  startPosition: {x: 0, y: 0, z: 0}
-  roundOnePickupStart: {fileID: 0}

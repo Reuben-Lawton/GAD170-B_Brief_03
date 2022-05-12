@@ -9,7 +9,7 @@ public class RoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startGeneration();
+        // startGeneration();
     }
 
     // Update is called once per frame
@@ -25,8 +25,8 @@ public class RoundManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void startGeneration()
-    {
-        pickups = FindObjectOfType<Pickups>();
-    }
+    //public void startGeneration()
+    //{
+    //    pickups = FindObjectOfType<Pickups>();
+    //}
 }

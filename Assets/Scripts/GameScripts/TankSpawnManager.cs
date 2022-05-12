@@ -68,6 +68,8 @@ public class TankSpawnManager : MonoBehaviour
                 GameObject clone = Instantiate(tankPrefabs[i], tempSpawnPoint.position, tankPrefabs[i].transform.rotation);
                 startingAllPossibleSpawnPoints.Remove(tempSpawnPoint); // remove the temp spawn point from our possible spawn point list
                 allTanksSpawnedIn.Add(clone); // keep track of the tank we just spawned in
+
+                // tankPrefabs.Add(Material).
             }
         }
         else
