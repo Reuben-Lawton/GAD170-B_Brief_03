@@ -224,7 +224,7 @@ public class PlayerCollecting : MonoBehaviour
         Debug.Log("Collision Detected on Pickup!");
 
         // Check if the collision Was Player One
-        if (collision.gameObject.tag == "Player_One")
+        if (collision.gameObject.CompareTag("Player_One"))
         {
             Debug.Log("Player One has Collided with the pickup");
 
@@ -232,7 +232,7 @@ public class PlayerCollecting : MonoBehaviour
             GameObject currentPickup = GetComponent<GameObject>();
 
             // Check if the current pickup has a tag GreenPickup
-            if (currentPickup.tag == "GreenPickup")
+            if (currentPickup.CompareTag("GreenPickup"))
             {
                 IsCorrectPickup = true; // Set to correct pickup
                 IsGreenAction = true; // Set to Green Action
@@ -245,7 +245,7 @@ public class PlayerCollecting : MonoBehaviour
 
             }
             // Check if current pickup is Red and then apply wrong actions
-            else if (currentPickup.tag == "RedPickup")
+            else if (currentPickup.CompareTag("RedPickup"))
             {
                 IsCorrectPickup = false; // Set to wrong Pickup
                 IsRedAction = true; // Set Action to occur on Red Tank
@@ -275,7 +275,7 @@ public class PlayerCollecting : MonoBehaviour
             GameObject currentPickup = GetComponent<GameObject>();
 
             // Check if the current pickup has a tag RedPickup
-            if (currentPickup.tag == "RedPickup")
+            if (currentPickup.CompareTag("RedPickup"))
             {
                 IsCorrectPickup = true; // Set to correct pickup
                 IsRedAction = true; // Set Red Action to True
@@ -287,7 +287,7 @@ public class PlayerCollecting : MonoBehaviour
                 Debug.Log("Pickup correct Event Triggered");
             }
             // Check if current pickup is Green and then apply wrong actions
-            else if (currentPickup.tag == "GreenPickup")
+            else if (currentPickup.CompareTag("GreenPickup"))
             {
                 IsCorrectPickup = false; // Set Wrong Pickup
                 IsGreenAction = true;  // Set Action to occur on Green Tank

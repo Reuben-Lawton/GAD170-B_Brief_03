@@ -57,6 +57,7 @@ public class TankSpawnManager : MonoBehaviour
 
     private void SpawnTanks(int NumberToSpawn)
     {
+        bool greenDone = false;
         if (tankPrefabs.Count >= NumberToSpawn && allPossibleSpawnPoints.Count >= NumberToSpawn)
         {
             // we good to go
@@ -69,7 +70,49 @@ public class TankSpawnManager : MonoBehaviour
                 startingAllPossibleSpawnPoints.Remove(tempSpawnPoint); // remove the temp spawn point from our possible spawn point list
                 allTanksSpawnedIn.Add(clone); // keep track of the tank we just spawned in
 
+                // clone.AddComponent<Material.
                 // tankPrefabs.Add(Material).
+                // clone.GetComponent<Renderer>.
+                //clone.renderer.material.color = Color.red;
+
+
+                if (greenDone != true)
+                {
+                    Debug.Log("Green Tank Spawned!");
+                    // set green to done is true
+                    greenDone = true;
+                }
+                else
+                {
+                    // clone.TryGetComponent<Material>(out Material material);
+
+                    
+                    //clone.
+                    //clone.AddComponent<Renderer> = gameObject.AddComponent<Renderer>();
+                    //var newTank = clone.GetComponent<Renderer>();
+                    //newTank.material.color = Color.red;
+                    //Debug.Log("Should have spawned the next tank as Red");
+                    Color newRedTank = Color.red;
+
+                    MeshRenderer[] redTank = clone.GetComponents<MeshRenderer>();
+                    GameObject tankPart1 = GameObject.Find("TankChassis");
+
+                    MeshRenderer thisPart1 = tankPart1.GetComponent<MeshRenderer>();
+                    var part1Colour = thisPart1.material.color;
+
+                    part1Colour = newRedTank;
+                    Debug.Log("Part of tank should have changed to Red");
+
+                    //for (int j = 0; j < redTank.Length; j++)
+                    //{
+                    //    var mycurrentRend = clone.GetComponent<MeshRenderer>();
+                    //    mycurrentRend.material.color = newRedTank;
+                    //    Debug.Log("Part of tank should have changed to Red");
+                    //}
+
+
+                    Debug.Log("Should have spawned the next tank as Red");
+                }
             }
         }
         else
