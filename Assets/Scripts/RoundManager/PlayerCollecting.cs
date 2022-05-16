@@ -40,6 +40,10 @@ public class PlayerCollecting : MonoBehaviour
 
     public bool StorageToIncrease = false; // Set Storage increase option 
 
+    private GameObject thisPickup;
+
+    private GameObject theCurrentTank;
+
     #endregion
 
     #region defunct code that is here for legacy and to look back on in future
@@ -221,15 +225,18 @@ public class PlayerCollecting : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
+        thisPickup = GetComponentInParent<GameObject>();
+        theCurrentTank = collision.gameObject;
         Debug.Log("Collision Detected on Pickup!");
 
         // Check if the collision Was Player One
-        if (collision.gameObject.CompareTag("Player_One"))
+        if (collision.gameObject.name =="Player_One")
         {
             Debug.Log("Player One has Collided with the pickup");
 
             // Get a reference to the current pickup object
-            GameObject currentPickup = GetComponent<GameObject>();
+            //GameObject currentPickup = GetComponent<GameObject>();
+            GameObject currentPickup = this.gameObject;
 
             // Check if the current pickup has a tag GreenPickup
             if (currentPickup.CompareTag("GreenPickup"))
@@ -243,6 +250,8 @@ public class PlayerCollecting : MonoBehaviour
                 pickupTriggerEvent?.Invoke();
                 Debug.Log("Pickup correct Event Triggered");
 
+                // Attach the correct pickup to the tank
+                AttachPickup(thisPickup, theCurrentTank);
             }
             // Check if current pickup is Red and then apply wrong actions
             else if (currentPickup.CompareTag("RedPickup"))
@@ -252,10 +261,10 @@ public class PlayerCollecting : MonoBehaviour
                 StorageToIncrease = false; // No Increase to storage
 
                 // Get a reference for the colliding tanks rigidbody
-
-                if (collision.rigidbody != null)
+                
+                if (theCurrentTank.GetComponent<Rigidbody>() != null)
                 {
-                    CollidingTankRigidBody = GetComponent<Rigidbody>();
+                    CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
                 }
 
                 //Invoke the wrong player event
@@ -267,12 +276,13 @@ public class PlayerCollecting : MonoBehaviour
         /// <summary>
         /// Actions for when Player Two collides with the Pickups
         /// </summary>
-        else if (collision.gameObject.tag == "Player_Two")
+        else if (collision.gameObject.name == "Player_Two")
         {
             Debug.Log("Player Two has Collided with the pickup");
 
             // Get a reference to the current Pickup Object
-            GameObject currentPickup = GetComponent<GameObject>();
+            //GameObject currentPickup = GetComponent<GameObject>();
+            GameObject currentPickup = this.gameObject;
 
             // Check if the current pickup has a tag RedPickup
             if (currentPickup.CompareTag("RedPickup"))
@@ -285,6 +295,9 @@ public class PlayerCollecting : MonoBehaviour
                 // Invoke the event
                 pickupTriggerEvent?.Invoke();
                 Debug.Log("Pickup correct Event Triggered");
+
+                // Attach the correct pickup to the tank
+                AttachPickup(thisPickup, theCurrentTank);
             }
             // Check if current pickup is Green and then apply wrong actions
             else if (currentPickup.CompareTag("GreenPickup"))
@@ -295,9 +308,9 @@ public class PlayerCollecting : MonoBehaviour
 
                 // Get a reference for the colliding tanks rigidbody
 
-                if (collision.rigidbody != null)
+                if (theCurrentTank.GetComponent<Rigidbody>() != null)
                 {
-                    CollidingTankRigidBody = GetComponent<Rigidbody>();
+                    CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
                 }
 
                 //Invoke the wrong player event
@@ -372,6 +385,24 @@ public class PlayerCollecting : MonoBehaviour
         IsCorrectPickup = false; // Reset Correct Pickup
         IsGreenAction = false; // Reset Green Action
         IsRedAction = false; // Reset Red Action
+    }
+
+    /// <summary>
+    ///  Attach the pickp to the correct colliding tank
+    /// </summary>
+    /// <param name="theHitPickup"></param>
+    /// <param name="theTank"></param>
+    public void AttachPickup(GameObject theHitPickup, GameObject theTank)
+    {
+        theHitPickup.transform.parent = theTank.transform;
+        Collider currentPickupCollider = theHitPickup.GetComponent<Collider>();
+
+        if (currentPickupCollider != null)
+        {
+            currentPickupCollider.enabled = false;
+        }
+        
+           
     }
 
 }
