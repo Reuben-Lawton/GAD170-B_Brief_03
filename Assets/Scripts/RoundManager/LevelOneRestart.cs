@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FallThroughFloor : MonoBehaviour
+public class LevelOneRestart : MonoBehaviour
 {
     // Value used for the current scene
     private int currentScene;
@@ -25,7 +25,9 @@ public class FallThroughFloor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Object fell into the void and as a result will now trigger a restart");
+        
+        //Debug.Log("Object fell into the void and as a result will now trigger a restart");
+        
         ResetLevel();
 
         Debug.Log("The Level has been reset");

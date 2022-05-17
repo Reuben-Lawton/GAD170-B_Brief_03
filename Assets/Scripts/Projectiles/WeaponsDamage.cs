@@ -16,9 +16,7 @@ public class WeaponsDamage : MonoBehaviour
 
     private int currentScene = 1;
 
-    private Coroutine m_restartLevelRoutine;
-
-
+    // private Coroutine m_restartLevelRoutine;
 
 
     private void OnCollisionEnter(Collision collision)

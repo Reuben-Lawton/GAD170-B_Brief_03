@@ -10,7 +10,7 @@ public class PortalManager : MonoBehaviour
 
     //private PlayerNumber m_CurrentPlayerNumber;
     private string m_CurrentPlayer;
-    
+        
     private Color m_PlayerColour;
     private Transform m_VortexTransform;
 
@@ -25,7 +25,7 @@ public class PortalManager : MonoBehaviour
     {
       
     }
-
+        
 
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +39,9 @@ public class PortalManager : MonoBehaviour
             // reference to its transform so it can be warped
             m_thisTanksTransform = m_collidingTank.GetComponent<Transform>();
             Debug.Log("Have a reference to the tank that is trying to warp");
+            Debug.Log("The current tank is called : " + other.name);
+
+            //Debug.Log("The current player is :" + GetComponent<PlayerNumber>());
         }
 
         #region Attempted to use PlayerNumber to identify which tank but no go for me
@@ -60,7 +63,7 @@ public class PortalManager : MonoBehaviour
         #endregion
 
         // check which player is trying to enter
-        if (other.name == "Player_01")
+        if (other.name == "Player_01(Clone)")
         {
             // Player one is set to green
             m_CurrentPlayer = other.name;
@@ -70,7 +73,7 @@ public class PortalManager : MonoBehaviour
             // Check which portal they tried to enter
             CheckCorrectTankAndPortal();
         }
-        else if (other.name == "Player_02")
+        else if (other.name == "Player_02(Clone)")
         {
             // player two is set to red
             m_CurrentPlayer = other.name;
@@ -91,6 +94,7 @@ public class PortalManager : MonoBehaviour
         if (GetComponent<Transform>() != null)
         {
             m_VortexTransform = GetComponent<Transform>();
+            Debug.Log("The current vortex that trying to access is called : " + m_VortexTransform.name);
         }
 
         ///<summary>
@@ -106,7 +110,13 @@ public class PortalManager : MonoBehaviour
 
                 // Set a temp vector3 and then teleport the current tank
                 Vector3 newLocation = BaseLocations().position;
+                Debug.Log("The base Vector3 has been set as :" + newLocation);
+
+                // Teleport the tank
                 TeleportToBase(m_thisTanksTransform, newLocation);
+                Debug.Log("Tank Should now have warped");
+
+                m_thisTanksTransform.rotation = m_playersBase.localRotation;
             }
             // if green tank then wrong portal
             else if (m_PlayerColour == Color.green)
@@ -116,7 +126,11 @@ public class PortalManager : MonoBehaviour
 
                 // Set a temp vector3 and then teleport the current tank
                 Vector3 newLocation = penaltyWarpReturnToStart.position;
+                Debug.Log("The transport location Vector3 has been set to the penalty respawn area :" + newLocation);
+
+                // Teleport the tank
                 TeleportToBase(m_thisTanksTransform, newLocation);
+                Debug.Log("Tank Should now have warped");
             }
         }
         ///<summary>
@@ -132,7 +146,11 @@ public class PortalManager : MonoBehaviour
 
                 // Set a temp vector3 and then teleport the current tank
                 Vector3 newLocation = BaseLocations().position;
+                Debug.Log("The base Vector3 has been set as :" + newLocation);
+
+                // Teleport the tank
                 TeleportToBase(m_thisTanksTransform, newLocation);
+                Debug.Log("Tank Should now have warped");
             }
             // if red tank then wrong portal
             else if (m_PlayerColour == Color.red)
@@ -142,7 +160,11 @@ public class PortalManager : MonoBehaviour
 
                 // Set a temp vector3 and then teleport the current tank
                 Vector3 newLocation = penaltyWarpReturnToStart.position;
+                Debug.Log("The transport location Vector3 has been set to the penalty respawn area :" + newLocation);
+
+                // Teleport the tank
                 TeleportToBase(m_thisTanksTransform, newLocation);
+                Debug.Log("Tank Should now have warped");
 
             }
         }
@@ -158,15 +180,17 @@ public class PortalManager : MonoBehaviour
         // if player is red, the base location is
         if (m_PlayerColour == Color.red)
         {
-            // only added the 1 location into the list atm
+            
+            // set to first base in List
             m_playersBase = PlayerBaseLocation[0];
             return m_playersBase;
         }
         // if player is green the base location is
         else if (m_PlayerColour == Color.green)
         {   
-            // only added the 1 location into the list atm
-            m_playersBase = PlayerBaseLocation[0];
+            
+            // set to second base in list
+            m_playersBase = PlayerBaseLocation[1];
             return m_playersBase;
         }
         else
@@ -203,10 +227,10 @@ public class PortalManager : MonoBehaviour
     {
         Transform objectToWarpToPenaltyArea = (GetComponent<Transform>());
 
-        if (m_isCorrectPortal == false)
-        {
-            m_collidingTank.transform.position = penaltyWarpReturnToStart.position;
-        }
+        //if (m_isCorrectPortal == false)
+        //{
+        //    m_collidingTank.transform.position = penaltyWarpReturnToStart.position;
+        //}
 
         if (objectToWarpToPenaltyArea != null)
         {

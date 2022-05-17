@@ -225,21 +225,22 @@ public class PlayerCollecting : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
-        thisPickup = GetComponentInParent<GameObject>();
+        //thisPickup = GetComponent<GameObject>();
         theCurrentTank = collision.gameObject;
-        Debug.Log("Collision Detected on Pickup!");
+        Debug.Log("Collision Detected on Pickup!"); 
 
         // Check if the collision Was Player One
-        if (collision.gameObject.name =="Player_One")
+        if (collision.gameObject.name == "Player_One(Clone)")
         {
             Debug.Log("Player One has Collided with the pickup");
 
             // Get a reference to the current pickup object
             //GameObject currentPickup = GetComponent<GameObject>();
-            GameObject currentPickup = this.gameObject;
+            thisPickup = gameObject;
+            Debug.Log("The Current pickup has a tag called : " + thisPickup.tag);
 
             // Check if the current pickup has a tag GreenPickup
-            if (currentPickup.CompareTag("GreenPickup"))
+            if (thisPickup.CompareTag("GreenPickup"))
             {
                 IsCorrectPickup = true; // Set to correct pickup
                 IsGreenAction = true; // Set to Green Action
@@ -254,7 +255,7 @@ public class PlayerCollecting : MonoBehaviour
                 AttachPickup(thisPickup, theCurrentTank);
             }
             // Check if current pickup is Red and then apply wrong actions
-            else if (currentPickup.CompareTag("RedPickup"))
+            else if (thisPickup.CompareTag("RedPickup"))
             {
                 IsCorrectPickup = false; // Set to wrong Pickup
                 IsRedAction = true; // Set Action to occur on Red Tank
@@ -276,16 +277,16 @@ public class PlayerCollecting : MonoBehaviour
         /// <summary>
         /// Actions for when Player Two collides with the Pickups
         /// </summary>
-        else if (collision.gameObject.name == "Player_Two")
+        else if (collision.gameObject.name == "Player_Two(Clone)")
         {
             Debug.Log("Player Two has Collided with the pickup");
 
             // Get a reference to the current Pickup Object
             //GameObject currentPickup = GetComponent<GameObject>();
-            GameObject currentPickup = this.gameObject;
+            thisPickup = gameObject;
 
             // Check if the current pickup has a tag RedPickup
-            if (currentPickup.CompareTag("RedPickup"))
+            if (thisPickup.CompareTag("RedPickup"))
             {
                 IsCorrectPickup = true; // Set to correct pickup
                 IsRedAction = true; // Set Red Action to True
@@ -300,7 +301,7 @@ public class PlayerCollecting : MonoBehaviour
                 AttachPickup(thisPickup, theCurrentTank);
             }
             // Check if current pickup is Green and then apply wrong actions
-            else if (currentPickup.CompareTag("GreenPickup"))
+            else if (thisPickup.CompareTag("GreenPickup"))
             {
                 IsCorrectPickup = false; // Set Wrong Pickup
                 IsGreenAction = true;  // Set Action to occur on Green Tank

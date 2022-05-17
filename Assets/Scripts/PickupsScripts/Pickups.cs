@@ -36,7 +36,8 @@ public class Pickups : MonoBehaviour
 
     //private Vector3 objectPoolPosition = new(30, 35, 30); //   A new Vector3 somewhere off screen
     private Vector3 objectPoolPosition = new(1, 1, 1); //   A new Vector3 somewhere off screen
-                                                            //public List< GreenPickupList = new();
+                                                            
+    //public List< GreenPickupList = new();
 
     //public GameObject SingleAmmo;
     //public GameObject TwentyPackAmmo;
