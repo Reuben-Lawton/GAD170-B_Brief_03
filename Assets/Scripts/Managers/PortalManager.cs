@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PortalManager : MonoBehaviour
 {
@@ -20,15 +21,30 @@ public class PortalManager : MonoBehaviour
 
     public Transform penaltyWarpReturnToStart;
 
+    public UnityEvent WarpPortalActivated;
+
     // Start is called before the first frame update
     void Start()
     {
       
     }
-        
+
+
+    private void OnEnable()
+    {
+        WarpPortalActivated.AddListener(CheckCorrectTankAndPortal);
+    }
+
+
+    private void OnDisable()
+    {
+        WarpPortalActivated.RemoveListener(CheckCorrectTankAndPortal);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
+        
         // reference to the colliding tank
         m_collidingTank = other.gameObject;
 
@@ -39,10 +55,12 @@ public class PortalManager : MonoBehaviour
             // reference to its transform so it can be warped
             m_thisTanksTransform = m_collidingTank.GetComponent<Transform>();
             Debug.Log("Have a reference to the tank that is trying to warp");
-            Debug.Log("The current tank is called : " + other.name);
+            //Debug.Log("The current tank is called : " + other.name);
 
             //Debug.Log("The current player is :" + GetComponent<PlayerNumber>());
         }
+        // start the portal activated event
+
 
         #region Attempted to use PlayerNumber to identify which tank but no go for me
         //// check which player is trying to enter
@@ -71,7 +89,7 @@ public class PortalManager : MonoBehaviour
             Debug.Log("It is the Green tank attempting to enter");
 
             // Check which portal they tried to enter
-            CheckCorrectTankAndPortal();
+            // CheckCorrectTankAndPortal(); // added to event instead
         }
         else if (other.name == "Player_02(Clone)")
         {
@@ -81,8 +99,12 @@ public class PortalManager : MonoBehaviour
             Debug.Log("It is the Red tank attempting to enter");
 
             // Check which portal they tried to enter
-            CheckCorrectTankAndPortal();
+            // CheckCorrectTankAndPortal(); // added to event instead
         }
+
+        // Start the warp portal event
+        WarpPortalActivated?.Invoke();
+
     }
 
     /// <summary>
@@ -102,6 +124,7 @@ public class PortalManager : MonoBehaviour
         /// </summary>
         if (m_VortexTransform.name == "RedWarpZone")
         {
+            Debug.Log("The Current vortex you are trying to enter is : " + m_VortexTransform.name);
             // if red tank then good to go
             if (m_PlayerColour == Color.red)
             {
@@ -131,6 +154,8 @@ public class PortalManager : MonoBehaviour
                 // Teleport the tank
                 TeleportToBase(m_thisTanksTransform, newLocation);
                 Debug.Log("Tank Should now have warped");
+
+                m_thisTanksTransform.rotation = m_playersBase.localRotation;
             }
         }
         ///<summary>
@@ -182,7 +207,7 @@ public class PortalManager : MonoBehaviour
         {
             
             // set to first base in List
-            m_playersBase = PlayerBaseLocation[0];
+            m_playersBase = PlayerBaseLocation[1];
             return m_playersBase;
         }
         // if player is green the base location is
@@ -190,7 +215,7 @@ public class PortalManager : MonoBehaviour
         {   
             
             // set to second base in list
-            m_playersBase = PlayerBaseLocation[1];
+            m_playersBase = PlayerBaseLocation[0];
             return m_playersBase;
         }
         else

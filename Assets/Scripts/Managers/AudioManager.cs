@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
 
     public List<AudioClip> WrongPickUpSoundClips = new();
 
+    public List<AudioClip> PortalWarpSoundClips = new();
+
     //public AudioSource WarDrums = new();
 
     private AudioSource m_AudioSource; // reference to the audio source
@@ -66,6 +68,12 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Wrong Pickup Audio played");
     }
 
+    public void PortalWarp()
+    {
+        PlayAudioClipsStart(PortalWarpSoundClips);
+        Debug.Log("Portal Warping Audio played");
+    }
+
     /// <summary>
     /// Function to stop all other audio playing
     /// </summary>
@@ -97,12 +105,16 @@ public class AudioManager : MonoBehaviour
     /// <param name="audioClips"></param>
     private void PlayAudioClipsStart(List<AudioClip> audioClips)
     {
+        Debug.Log("Getting a reference to the audio source");
         m_AudioSource = GetComponent<AudioSource>();
+
         AudioClip clipToPlay = audioClips[Random.Range(0, audioClips.Count)];
+        Debug.Log("Selected a random Audio Clip");
 
         // Changes the pitch each time played - gives less sound fatigue
         m_AudioSource.pitch = Random.Range(0.1f, 0.2f);
         Debug.Log("Adjusted the pitch of the audio clip");
+
         m_AudioSource.PlayOneShot(clipToPlay);
         Debug.Log("Played the audio clip");
     }
