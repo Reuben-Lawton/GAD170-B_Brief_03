@@ -35,15 +35,15 @@ public class LaunchPad : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        currentTriggeringObject = other.GetComponent<Rigidbody>();
-        Debug.Log("Reference to colliding object is set");
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    currentTriggeringObject = other.GetComponent<Rigidbody>();
+    //    Debug.Log("Reference to colliding object is set");
 
-        Vector3 launchVector = AddDirectionsToLaunch();
-        currentTriggeringObject.AddForce(launchVector * m_LaunchForce);
-        Debug.Log("Have added a force of 500 in the up direction");
-    }
+    //    Vector3 launchVector = AddDirectionsToLaunch();
+    //    currentTriggeringObject.AddForce(launchVector * m_LaunchForce);
+    //    Debug.Log("Have added a force of 500 in the up direction");
+    //}
 
     private Vector3 AddDirectionsToLaunch()
     {
@@ -66,8 +66,7 @@ public class LaunchPad : MonoBehaviour
     }
 
     private float AddRandomLaunchForce()
-    {
-        
+    {        
         float randomForceAmount = Random.Range(100, 500);
 
         return randomForceAmount;

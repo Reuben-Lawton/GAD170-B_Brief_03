@@ -21,6 +21,7 @@ public class WeaponsDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Something hit a weapon!");
         collision.rigidbody.AddForce(Vector3.back * forceApplied);
 
         // Invoke the Tank hitting a Weapon Event

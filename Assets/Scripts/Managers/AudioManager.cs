@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
 
     public List<AudioClip> PortalWarpSoundClips = new();
 
+    public List<AudioClip> WeaponSoundsClips = new();
+
     //public AudioSource WarDrums = new();
 
     private AudioSource m_AudioSource; // reference to the audio source
@@ -68,10 +70,19 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Wrong Pickup Audio played");
     }
 
+    /// <summary>
+    /// Plays a portal warp noise
+    /// </summary>
     public void PortalWarp()
     {
         PlayAudioClipsStart(PortalWarpSoundClips);
         Debug.Log("Portal Warping Audio played");
+    }
+
+    public void WeaponNoises()
+    {
+        PlayAudioClipsStart(WeaponSoundsClips);
+        Debug.Log("Weapon noises Audio played");
     }
 
     /// <summary>

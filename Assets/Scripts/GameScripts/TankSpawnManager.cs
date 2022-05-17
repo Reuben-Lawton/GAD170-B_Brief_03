@@ -10,6 +10,9 @@ public class TankSpawnManager : MonoBehaviour
     public List<GameObject> tankPrefabs = new List<GameObject>(); // a list of all the possible tank prefabs
     private List<GameObject> allTanksSpawnedIn = new List<GameObject>(); // a list of all the tanks spawned in
 
+    private bool greenDone = false; // check if green tank has been spawned
+    private GameObject currentTank;
+
     private void OnEnable()
     {
         TankGameEvents.SpawnTanksEvent += SpawnTanks;
@@ -57,7 +60,7 @@ public class TankSpawnManager : MonoBehaviour
 
     private void SpawnTanks(int NumberToSpawn)
     {
-        bool greenDone = false;
+        
         if (tankPrefabs.Count >= NumberToSpawn && allPossibleSpawnPoints.Count >= NumberToSpawn)
         {
             // we good to go
@@ -74,7 +77,7 @@ public class TankSpawnManager : MonoBehaviour
                 // tankPrefabs.Add(Material).
                 // clone.GetComponent<Renderer>.
                 //clone.renderer.material.color = Color.red;
-
+                currentTank = clone.gameObject;
 
                 if (greenDone != true)
                 {
@@ -82,36 +85,14 @@ public class TankSpawnManager : MonoBehaviour
                     // set green to done is true
                     greenDone = true;
                 }
-                else
+                else if (greenDone == true);
                 {
-                    // clone.TryGetComponent<Material>(out Material material);
-
-                    
-                    //clone.
-                    //clone.AddComponent<Renderer> = gameObject.AddComponent<Renderer>();
-                    //var newTank = clone.GetComponent<Renderer>();
-                    //newTank.material.color = Color.red;
-                    //Debug.Log("Should have spawned the next tank as Red");
-                    Color newRedTank = Color.red;
-
-                    MeshRenderer[] redTank = clone.GetComponents<MeshRenderer>();
-                    GameObject tankPart1 = GameObject.Find("TankChassis");
-
-                    MeshRenderer thisPart1 = tankPart1.GetComponent<MeshRenderer>();
-                    var part1Colour = thisPart1.material.color;
-
-                    part1Colour = newRedTank;
-                    Debug.Log("Part of tank should have changed to Red");
-
-                    //for (int j = 0; j < redTank.Length; j++)
-                    //{
-                    //    var mycurrentRend = clone.GetComponent<MeshRenderer>();
-                    //    mycurrentRend.material.color = newRedTank;
-                    //    Debug.Log("Part of tank should have changed to Red");
-                    //}
-
+                    // StartCoroutine(MakeRedTank());
+                    MakeRedTank();
 
                     Debug.Log("Should have spawned the next tank as Red");
+
+                    // StopCoroutine(MakeRedTank());
                 }
             }
         }
@@ -121,5 +102,54 @@ public class TankSpawnManager : MonoBehaviour
         }
 
         TankGameEvents.OnTanksSpawnedEvent?.Invoke(allTanksSpawnedIn); // tell the game that our tanks have been spawned in!
+    }
+
+    //private IEnumerator MakeRedTank()
+    private void MakeRedTank()
+    {
+        Color newRedTank = Color.red;
+
+        MeshRenderer[] redTank = currentTank.GetComponents<MeshRenderer>();
+
+        for (int i = 0; i < redTank.Length; i++)
+        {
+            MeshRenderer currentRender = redTank[i];
+
+            currentRender.material.color = newRedTank;
+            Debug.Log("Part of tank should have changed to Red");
+            //yield return null;
+        }
+
+        Debug.Log("Should have spawned the next tank as Red");
+        //yield return null;
+
+
+        // clone.TryGetComponent<Material>(out Material material);
+
+
+        //clone.
+        //clone.AddComponent<Renderer> = gameObject.AddComponent<Renderer>();
+        //var newTank = clone.GetComponent<Renderer>();
+        //newTank.material.color = Color.red;
+        //Debug.Log("Should have spawned the next tank as Red");
+
+        // GameObject tankPart1 = GameObject.Find("TankChassis");
+
+        //MeshRenderer thisPart1 = tankPart1.GetComponent<MeshRenderer>();
+        //var part1Colour = thisPart1.material.color;
+
+        //part1Colour = newRedTank;
+
+
+
+
+        //for (int j = 0; j < redTank.Length; j++)
+        //{
+        //    var mycurrentRend = clone.GetComponent<MeshRenderer>();
+        //    mycurrentRend.material.color = newRedTank;
+        //    Debug.Log("Part of tank should have changed to Red");
+        //}
+
+
     }
 }
