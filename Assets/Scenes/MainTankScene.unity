@@ -2200,6 +2200,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 760c9e49305213741b7a21825db952cc, type: 3}
   - {fileID: 8300000, guid: 8eb54c045f0b399438b1a6f6914adeb0, type: 3}
   - {fileID: 8300000, guid: c3568b0edee15cb4c99a2e21080fa69c, type: 3}
+  WeaponSoundsClips:
+  - {fileID: 8300000, guid: 42ee2149336cc8248937c3099fba58b2, type: 3}
+  - {fileID: 8300000, guid: 3405436d8ec6e2148b74b8f2d2fb5f39, type: 3}
 --- !u!82 &453665035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7480,7 +7483,19 @@ MonoBehaviour:
   hitsCriticalLimit: 10
   tankHitWeaponEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 453665034}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: WeaponNoises
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1663768928 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 64c4eee0d3925fd4cae5a3f30f051a33,
@@ -8885,6 +8900,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 760c9e49305213741b7a21825db952cc, type: 3}
   - {fileID: 8300000, guid: 8eb54c045f0b399438b1a6f6914adeb0, type: 3}
   - {fileID: 8300000, guid: c3568b0edee15cb4c99a2e21080fa69c, type: 3}
+  WeaponSoundsClips: []
 --- !u!1001 &1885502666
 PrefabInstance:
   m_ObjectHideFlags: 0
