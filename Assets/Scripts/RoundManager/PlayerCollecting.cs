@@ -22,7 +22,7 @@ public class PlayerCollecting : MonoBehaviour
 
     public float forceAmountUp = 200; // A force amount 
 
-    private Rigidbody CollidingTankRigidBody; // reference to the rigidbody
+    public Rigidbody CollidingTankRigidBody; // reference to the rigidbody
 
     [Header("Events")]
 
@@ -32,7 +32,7 @@ public class PlayerCollecting : MonoBehaviour
 
     [Header("Event Variables")]
 
-    public bool isTank;
+    private bool isTank = false;
 
     public bool IsCorrectPickup = false; // Set if is correct pickup or not
 
@@ -212,25 +212,70 @@ public class PlayerCollecting : MonoBehaviour
         string tankName = theCurrentTank.name;
         //Debug.Log("The current tanks name is : " + tankName);
 
+        //collision.gameObject.name = tankName;
 
-        if (tankName != "Player_One(Clone)" || tankName != "Player_Two(Clone)")
+        //if (tankName != "Player_One(Clone)" || tankName != "Player_Two(Clone)")
+        if (theCurrentTank.name != "Player_01(Clone)" || theCurrentTank.name != "Player_02(Clone)")
         {
             isTank = false;
-            return;
+            Debug.Log("The object colliding is not a Tank");
+            Debug.Log("The object colliding is called : " + theCurrentTank.name);
+
+            if (theCurrentTank.name == "Player_01(Clone)")
+            {
+                transform.parent = theCurrentTank.transform;
+                isTank = true;
+                Debug.Log("The object is Player 01 colliding: is a tank");
+                Debug.Log("The object colliding is called : " + tankName);
+            }
+            else
+            {
+                Debug.Log("Not a valid object ?");
+            }
+
+            if (theCurrentTank.name == "Player_02(Clone)")
+            {
+                isTank = true;
+                Debug.Log("The object is Player 02 colliding: is a tank");
+                Debug.Log("The object colliding is called : " + tankName);
+            }
+            else
+            {
+                Debug.Log("Not a valid object ?");
+            }
         }
-        else if (tankName == "Player_One(Clone)" || tankName == "Player_Two(Clone)")
+        else
         {
-            isTank = true;
+            // else if (tankName == "Player_01(Clone)" || tankName == "Player_02(Clone)")
+            if (theCurrentTank.name == "Player_01(Clone)")
+            {
+                transform.parent = theCurrentTank.transform;
+                isTank = true;
+                Debug.Log("The object is Player 01 colliding: is a tank");
+                Debug.Log("The object colliding is called : " + theCurrentTank.name);
+            }
+            else if (theCurrentTank.name == "Player_02(Clone)")
+            {
+                isTank = true;
+                Debug.Log("The object is Player 02 colliding: is a tank");
+                Debug.Log("The object colliding is called : " + theCurrentTank.name);
+            }
+            else
+            {
+                Debug.Log("not sure what object it is then");
+                Debug.Log("The object colliding is called : " + theCurrentTank.name);
+            }
         }
 
+        
 
         //if (collision.gameObject.name != "Player_One(Clone)" || collision.gameObject.name != "Player_Two(Clone)")
         //{
         //    return;
         //}
         //else if
-            
-        if(isTank == true)
+
+        if (isTank == true)
         {           
                         
             Debug.Log("Collision Detected, now to see if it was either tank before doing anything else");
@@ -244,7 +289,7 @@ public class PlayerCollecting : MonoBehaviour
             Debug.Log("The current pickup is called : " + thisPickup.name);
 
             // Check if the collision Was Player One
-            if (collision.gameObject.name == "Player_One(Clone)")
+            if (collision.gameObject.name == "Player_01(Clone)")
             {
                 Debug.Log("Player One has Collided with the pickup");
 
@@ -256,12 +301,14 @@ public class PlayerCollecting : MonoBehaviour
                     StorageToIncrease = true; // Storage is Set now to increase
                     Debug.Log("Set Correct Pickup and Set to Green");
 
+                    Debug.Log("About to start the Correct Pickup Event");
+
                     // Invoke the event
                     pickupTriggerEvent?.Invoke();
                     Debug.Log("Pickup correct Event Triggered");
 
                     // Attach the correct pickup to the tank
-                    AttachPickup(thisPickup, theCurrentTank);
+                    // AttachPickup(thisPickup, theCurrentTank);
                 }
                 // Check if current pickup is Red and then apply wrong actions
                 else if (thisPickup.CompareTag("RedPickup"))
@@ -271,12 +318,18 @@ public class PlayerCollecting : MonoBehaviour
                     StorageToIncrease = false; // No Increase to storage
 
                     // Get a reference for the colliding tanks rigidbody
-
+                    Debug.Log("About to get the Rigidbody Reference");
                     if (theCurrentTank.GetComponent<Rigidbody>() != null)
                     {
                         CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
+                        Debug.Log("Got a reference to the current tanks rigidbody");
+                    }
+                    else
+                    {
+                        Debug.Log("No rigidbody found ?");
                     }
 
+                    Debug.Log("About to start the Wrong Pickup Event ");
                     //Invoke the wrong player event
                     wrongPickupTriggerEvent?.Invoke();
                     Debug.Log("Wrong Pickup Event Triggered for Green Tank");
@@ -286,7 +339,7 @@ public class PlayerCollecting : MonoBehaviour
             /// <summary>
             /// Actions for when Player Two collides with the Pickups
             /// </summary>
-            else if (collision.gameObject.name == "Player_Two(Clone)")
+            else if (collision.gameObject.name == "Player_02(Clone)")
             {
                 Debug.Log("Player Two has Collided with the pickup");
 
@@ -298,12 +351,13 @@ public class PlayerCollecting : MonoBehaviour
                     StorageToIncrease = true; // Storage is Set now to increase
                     Debug.Log("Set Correct Pickup and Set to Red");
 
+                    Debug.Log("About to start the Correct Pickup Event");
                     // Invoke the event
                     pickupTriggerEvent?.Invoke();
                     Debug.Log("Pickup correct Event Triggered");
 
                     // Attach the correct pickup to the tank
-                    AttachPickup(thisPickup, theCurrentTank);
+                    // AttachPickup(thisPickup, theCurrentTank);
                 }
                 // Check if current pickup is Green and then apply wrong actions
                 else if (thisPickup.CompareTag("GreenPickup"))
@@ -314,11 +368,18 @@ public class PlayerCollecting : MonoBehaviour
 
                     // Get a reference for the colliding tanks rigidbody
 
+                    Debug.Log("About to get the Rigidbody Reference");
                     if (theCurrentTank.GetComponent<Rigidbody>() != null)
                     {
                         CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
+                        Debug.Log("Got a reference to the current tanks rigidbody");
+                    }
+                    else
+                    {
+                        Debug.Log("No rigidbody found ?");
                     }
 
+                    Debug.Log("About to start the Wrong Pickup Event ");
                     //Invoke the wrong player event
                     wrongPickupTriggerEvent?.Invoke();
                     Debug.Log("Wrong Pickup Event Triggered for Red Tank");
@@ -375,7 +436,19 @@ public class PlayerCollecting : MonoBehaviour
     /// <param name="amount"></param>
     public void RepelWrongTank(float amount)
     {
-        Debug.Log("Wrong Pickup!");
+        Debug.Log("Wrong Pickup! RepelWrongTank Function Now Starting");
+
+
+        if (theCurrentTank.GetComponent<Rigidbody>() != null)
+        {
+            CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
+            Debug.Log("Got a reference to the current tanks rigidbody");
+        }
+        else
+        {
+            Debug.Log("No rigidbody found ?");
+        }
+
 
         // Add a back force to the wrong tank
         CollidingTankRigidBody.AddForce(Vector3.back * amount);
@@ -388,7 +461,20 @@ public class PlayerCollecting : MonoBehaviour
     /// </summary>
     private void AddForceToWrong()
     {
+        Debug.Log("AddForceToWrong Function now active");
         // Add a force back to the tank that hit the wrong pickup
+
+
+        if (theCurrentTank.GetComponent<Rigidbody>() != null)
+        {
+            CollidingTankRigidBody = theCurrentTank.GetComponent<Rigidbody>();
+            Debug.Log("Got a reference to the current tanks rigidbody");
+        }
+        else
+        {
+            Debug.Log("No rigidbody found ?");
+        }
+
         CollidingTankRigidBody.AddForce(Vector3.back * forceApplied);
         Debug.Log("Applied a repeling Force, Player hit the wrong Pickup");
     }
@@ -442,6 +528,8 @@ public class PlayerCollecting : MonoBehaviour
         Vector3 moveUp = new(0, 1, 0);
         Debug.Log("Attempting to attach the pickup object to the tank");
         // make the current pickup parent to the current tank
+
+        theHitPickup.transform.parent = theTank.transform;
         theHitPickup.transform.parent.position = theTank.transform.position + onTopOfTank;
         Debug.Log("The pickup position should now match the tanks position");
         Collider currentPickupCollider = theHitPickup.GetComponent<Collider>();
@@ -454,11 +542,20 @@ public class PlayerCollecting : MonoBehaviour
         {
             Debug.Log("Attempting to turn of the pickups collider for now");
             // then disable the collider for now
-            currentPickupCollider.enabled = false;
+            // currentPickupCollider.enabled = false;
             Debug.Log("Should have now disabled the collider");
         }
 
 
+    }
+    /// <summary>
+    /// Add the attach pick up to the correct pickup event in the inspector
+    /// </summary>
+    public void AddAttachToEvent()
+    {
+        Debug.Log("Attempting to use the add attach to event function");
+        AttachPickup(thisPickup, theCurrentTank);
+        Debug.Log("Check if the pickup has attached");
     }
 
 }

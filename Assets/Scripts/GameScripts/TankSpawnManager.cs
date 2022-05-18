@@ -85,7 +85,7 @@ public class TankSpawnManager : MonoBehaviour
                     // set green to done is true
                     greenDone = true;
                 }
-                else if (greenDone == true);
+                else if (greenDone)
                 {
                     // StartCoroutine(MakeRedTank());
                     MakeRedTank();
@@ -109,7 +109,7 @@ public class TankSpawnManager : MonoBehaviour
     {
         Color newRedTank = Color.red;
 
-        MeshRenderer[] redTank = currentTank.GetComponents<MeshRenderer>();
+        MeshRenderer[] redTank = currentTank.GetComponentsInChildren<MeshRenderer>();
 
         for (int i = 0; i < redTank.Length; i++)
         {
