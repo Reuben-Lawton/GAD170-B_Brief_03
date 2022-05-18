@@ -85,7 +85,7 @@ public class MoveLaunchPads : MonoBehaviour
 
             if (newPadPosition != originalPadPosition)
             {
-                yield return 2;
+                
 
                 currentPadRigid.isKinematic = false;
 
@@ -94,7 +94,7 @@ public class MoveLaunchPads : MonoBehaviour
                 // currentPadRigid.MovePosition(thisPadsTransform.position + originalPadPosition);
 
                 currentPadRigid.isKinematic = true;
-
+                yield return 2;
             }
         }               
 
