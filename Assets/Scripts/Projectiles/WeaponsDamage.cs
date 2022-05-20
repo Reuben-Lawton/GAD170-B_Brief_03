@@ -33,7 +33,13 @@ public class WeaponsDamage : MonoBehaviour
     /// </summary>
     public void CalculateHits()
     {
-        for (int i = 0; i < hitsCriticalLimit; i++)
+        //for (int i = 0; i < hitsCriticalLimit; i++)
+        //{
+        //    hitsTaken += 1;
+        //    Debug.Log("Tank took another hit! \n Currently the Total Hits taken is : " + hitsTaken + "!");
+        //} 
+        
+        if (hitsTaken >= 0)
         {
             hitsTaken += 1;
             Debug.Log("Tank took another hit! \n Currently the Total Hits taken is : " + hitsTaken + "!");
@@ -57,6 +63,11 @@ public class WeaponsDamage : MonoBehaviour
                 howManyHitsList.Add(1);
                 Debug.Log("Adding 1 More Hit to the Hit list");
             }
+            else if (hitsTaken >= hitsCriticalLimit)
+            {
+                Debug.Log("Start the Critical Hit Action");
+                CriticalHitAction();
+            }
         }
     }
 
@@ -65,7 +76,7 @@ public class WeaponsDamage : MonoBehaviour
     /// </summary>
     public void CriticalHitAction()
     {
-        if (hitsTaken == hitsCriticalLimit)
+        if (hitsTaken >= hitsCriticalLimit)
         {
             Debug.Log("Your Dead, reseting the level");
         }

@@ -142,36 +142,8 @@ public class Pickups : MonoBehaviour
 
             for (int i = 0; i < listName.Count; i++)
             {
-                Debug.Log("GREEN Pickups Spawning Now");
+                Debug.Log("RED Pickups Spawning Now");
                 // temporary value for the currently spawned pickup
-                currentPickup = i;
-                if (currentPickup == 0)
-                {
-                    listName[currentPickup].transform.position = startPosition;
-                    Debug.Log("Set up the First GREEN Pickup Clone");
-                }
-                else if (currentPickup != 0)
-                {
-                    // the last spawn now is i -1 
-                    int lastSpot = i - 1;
-                    // gets the last spawn point used
-                    Vector3 lastPlacement = listName[lastSpot].transform.position;
-                    Debug.Log("The last GREEN spawned position was : " + lastPlacement);
-                    // moves the next spawn point forward 5
-                    nextPosition = lastPlacement + new Vector3(0, 0, 5);
-                    Debug.Log("The next GREEN position to spawn at will be : " + nextPosition);
-                    listName[currentPickup].transform.position = nextPosition;
-                    Debug.Log("The GREEN clone has spawned to the new position");
-                }
-
-            }
-        }
-        else if (listName == greenPickups)
-        {
-            Debug.Log("RED Pickups Spawning Now");
-            for (int i = 0; i < listName.Count; i++)
-            {
-
                 currentPickup = i;
                 if (currentPickup == 0)
                 {
@@ -180,13 +152,41 @@ public class Pickups : MonoBehaviour
                 }
                 else if (currentPickup != 0)
                 {
+                    // the last spawn now is i -1 
                     int lastSpot = i - 1;
+                    // gets the last spawn point used
                     Vector3 lastPlacement = listName[lastSpot].transform.position;
                     Debug.Log("The last RED spawned position was : " + lastPlacement);
-                    nextPosition = lastPlacement + new Vector3(0, 0, -5);
+                    // moves the next spawn point forward 5
+                    nextPosition = lastPlacement + new Vector3(0, 0, 5);
                     Debug.Log("The next RED position to spawn at will be : " + nextPosition);
                     listName[currentPickup].transform.position = nextPosition;
                     Debug.Log("The RED clone has spawned to the new position");
+                }
+
+            }
+        }
+        else if (listName == greenPickups)
+        {
+            Debug.Log("GREEN Pickups Spawning Now");
+            for (int i = 0; i < listName.Count; i++)
+            {
+
+                currentPickup = i;
+                if (currentPickup == 0)
+                {
+                    listName[currentPickup].transform.position = startPosition;
+                    Debug.Log("Set up the First GREEN Pickup Clone");
+                }
+                else if (currentPickup != 0)
+                {
+                    int lastSpot = i - 1;
+                    Vector3 lastPlacement = listName[lastSpot].transform.position;
+                    Debug.Log("The last GREEN spawned position was : " + lastPlacement);
+                    nextPosition = lastPlacement + new Vector3(0, 0, -5);
+                    Debug.Log("The next GREEN position to spawn at will be : " + nextPosition);
+                    listName[currentPickup].transform.position = nextPosition;
+                    Debug.Log("The GREEN clone has spawned to the new position");
                     // nextPosition += new Vector3(3, 0, 0);
                 }
 

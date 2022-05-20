@@ -25,8 +25,9 @@ public class LaunchPad : MonoBehaviour
         currentTriggeringObject = other.GetComponent<Rigidbody>();
         Debug.Log("Reference to colliding object is set");
 
+        Vector3 randomlyPickedDirection = AddDirectionsToLaunch();
 
-        currentTriggeringObject.AddForce(Vector3.up * m_LaunchForce);
+        currentTriggeringObject.AddForce(randomlyPickedDirection * m_LaunchForce);
         Debug.Log("Have added a force of 500 in the up direction");
 
         //currentTriggeringObject.AddForce(Vector3.forward * m_LaunchSpeed);

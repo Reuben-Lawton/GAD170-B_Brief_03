@@ -219,7 +219,7 @@ public class PlayerCollecting : MonoBehaviour
         {
             isTank = false;
             Debug.Log("The object colliding is not a Tank");
-            Debug.Log("The object colliding is called : " + theCurrentTank.name);
+            // Debug.Log("The object colliding is called : " + theCurrentTank.name);
 
             if (theCurrentTank.name == "Player_01(Clone)")
             {
@@ -241,7 +241,7 @@ public class PlayerCollecting : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not a valid object ?");
+                // Debug.Log("Not a valid object ?");
             }
         }
         else
@@ -262,8 +262,8 @@ public class PlayerCollecting : MonoBehaviour
             }
             else
             {
-                Debug.Log("not sure what object it is then");
-                Debug.Log("The object colliding is called : " + theCurrentTank.name);
+                // Debug.Log("not sure what object it is then");
+                // Debug.Log("The object colliding is called : " + theCurrentTank.name);
             }
         }
 
@@ -289,7 +289,7 @@ public class PlayerCollecting : MonoBehaviour
             Debug.Log("The current pickup is called : " + thisPickup.name);
 
             // Check if the collision Was Player One
-            if (collision.gameObject.name == "Player_01(Clone)")
+            if (theCurrentTank.name == "Player_01(Clone)")
             {
                 Debug.Log("Player One has Collided with the pickup");
 
@@ -339,7 +339,7 @@ public class PlayerCollecting : MonoBehaviour
             /// <summary>
             /// Actions for when Player Two collides with the Pickups
             /// </summary>
-            else if (collision.gameObject.name == "Player_02(Clone)")
+            else if (theCurrentTank.name == "Player_02(Clone)")
             {
                 Debug.Log("Player Two has Collided with the pickup");
 
@@ -399,6 +399,7 @@ public class PlayerCollecting : MonoBehaviour
     }
 
     #endregion
+
 
     #region defunct code that is here for legacy and to look back on in future
 
@@ -529,20 +530,31 @@ public class PlayerCollecting : MonoBehaviour
         Debug.Log("Attempting to attach the pickup object to the tank");
         // make the current pickup parent to the current tank
 
+        Vector3 currentTankPosition = theTank.transform.position;
+        Vector3 currentPickUpPosition = theHitPickup.transform.position;
+
+        theHitPickup.transform.position = Vector3.Lerp(currentTankPosition, currentPickUpPosition, Time.deltaTime);
+        Debug.Log("Move the hit pickup towards the colliding tank");
+
         theHitPickup.transform.parent = theTank.transform;
-        theHitPickup.transform.parent.position = theTank.transform.position + onTopOfTank;
+        Debug.Log("Set the current pickup to parent to the current tanks transform");
+
+        theHitPickup.transform.parent.position = theTank.transform.position + onTopOfTank + moveUp;
+
+
+
         Debug.Log("The pickup position should now match the tanks position");
         Collider currentPickupCollider = theHitPickup.GetComponent<Collider>();
 
         onTopOfTank += moveUp;
         Debug.Log("Moving the next pickup : " + onTopOfTank);
-
+            
         // if the pickup has a collider
         if (currentPickupCollider != null)
         {
             Debug.Log("Attempting to turn of the pickups collider for now");
             // then disable the collider for now
-            // currentPickupCollider.enabled = false;
+            currentPickupCollider.enabled = false;
             Debug.Log("Should have now disabled the collider");
         }
 
